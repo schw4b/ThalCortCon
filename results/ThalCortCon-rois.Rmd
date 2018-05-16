@@ -1,0 +1,32 @@
+---
+title: "ThalCort-rois"
+author: "Simon Schwab"
+date: "16 May 2018"
+output: html_notebook
+---
+
+
+## Variables
+```{r}
+FSLEYES = '/usr/bin/fsleyes'
+PATH_HOME = '/home/simon'
+ATLAS_THAL = file.path(PATH_HOME, 'Data', 'ThalCortCon', 'atlas')
+Sys.setenv(FSLEYES=FSLEYES, ATLAS_THAL=ATLAS_THAL)
+```
+
+## Show Thalamic ROIs
+```{bash eval=FALSE, include=FALSE}
+source /etc/fsl/fsl.sh
+
+# echo $ATLAS_SHIRER
+export NO_AT_BRIDGE=1 # accessibility bus warning
+
+echo $FSLEYES
+
+$FSLEYES --standard1mm \
+   $ATLAS_THAL/Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $ATLAS_THAL/rResize_img_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $ATLAS_THAL/flirt_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $ATLAS_THAL/rCoreg_NN_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+```
+
