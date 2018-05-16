@@ -1,0 +1,6 @@
+Next == 9 May:
+1) Download the 73 subjects -- Only fixed cleaned
+	1.1) rfMRI_REST1_7T_PA_hp2000_clean.nii.gz
+	1.2) Is there anything else available?
+2) Prepare atlas
+3) Download, parcellate and then delete them...
