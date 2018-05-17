@@ -1,20 +1,20 @@
-% by simon schwab
+% by simon schwab, 2018
 
 PATH = '~/Data/ThalCortCon/';
 
-%% load mask and fMRI
-mask = load_nii([PATH 'atlas/rCoreg_NN_Thalamus-maxprob-thr25-1mm.nii.gz']);
-nii = load_nii([PATH 'nii/vol001_rfMRI_REST1_7T_PA_hp2000_clean.nii.gz']);
+%% Split thalamus load mask into single binary 3D images
+mask = load_nii([PATH 'thalamus/rCoreg_NN_Thalamus-maxprob-thr25-1mm.nii.gz']);
 
-assert(sum(size(mask.img) == size(nii.img)) == 3, 'dimension mismatch')
+fid= fopen([PATH 'rois/labels_thalamus.txt']);
+labels = textscan(fid, '%d %s');
+fclose(fid);
 
-%% Plot single slice
-figure;
+dims = size(mask.img);
+Nn = max(mask.img(:));
+tmp=mask;
+for n=1:Nn
+    tmp.img = mask.img==n;
+    save_nii(tmp, [PATH 'rois/thalamus/' labels{2}{n} '.nii'])
+end
 
-x=50;
-
-subplot(1,2,1)
-imagesc(nii.img(:,:,x))
-subplot(1,2,2)
-imagesc(mask.img(:,:,x))
 
