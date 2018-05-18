@@ -1,7 +1,9 @@
+%SA, Ox, 2018
+%srafyouni@gmail.com
+
 clear
 
-
-WhichNet = '7Networks'; 
+WhichNet = '17Networks'; % choose between 17Networks and 7Networks
 
 
 startRow = 2;
@@ -22,7 +24,7 @@ for i = 1:NN
     NodeAss2Nets{i} = [C{3}]; 
 end
 
-UniqueNetName = unique(NodeAss2Nets);
+UniqueNetName = unique(NodeAss2Nets); %this somehow (sort based on Hex?) shuffle the labels, nothing to worry though!
 
 NodeAss2Nets_Idx = zeros(1,NN);
 for n = 1:numel(UniqueNetName)
