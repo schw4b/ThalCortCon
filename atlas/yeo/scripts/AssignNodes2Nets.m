@@ -23,3 +23,9 @@ for n = 1:numel(UniqueNetName)
      IDX_tmp = find(~cellfun(@isempty,strfind(NetNamesList,UniqueNetName{n})));
      NodeAss2Nets_Idx(IDX_tmp) = n;
 end
+
+% dlmwrite('NodeAssigments.txt',NodeAss2Nets_Idx,'delimiter','\n')
+% dlmwrite('NetworkNames.txt',UniqueNetName,'delimiter','\n')
+
+save('NodeAssigments.mat','NodeAss2Nets_Idx')
+save('NetworkNames.mat','UniqueNetName')
