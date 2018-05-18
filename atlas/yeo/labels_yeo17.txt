@@ -1,0 +1,17 @@
+1 ContA
+2 ContB
+3 ContC
+4 DefaultA
+5 DefaultB
+6 DefaultC
+7 DorsAttnA
+8 DorsAttnB
+9 Limbic
+10 SalVentAttnA
+11 SalVentAttnB
+12 SomMotA
+13 SomMotB
+14 TempPar
+15 VisCent
+16 VisPeri
+
