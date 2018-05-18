@@ -10,8 +10,8 @@ output: html_notebook
 ```{r}
 FSLEYES = '/usr/bin/fsleyes'
 PATH_HOME = '/home/simon'
-ATLAS_THAL = file.path(PATH_HOME, 'Data', 'ThalCortCon', 'atlas')
-Sys.setenv(FSLEYES=FSLEYES, ATLAS_THAL=ATLAS_THAL)
+PATH_ATLAS = file.path(PATH_HOME, 'Data', 'ThalCortCon', 'atlas')
+Sys.setenv(FSLEYES=FSLEYES, PATH_ATLAS=PATH_ATLAS)
 ```
 
 ## Show Thalamic ROIs
@@ -24,9 +24,35 @@ export NO_AT_BRIDGE=1 # accessibility bus warning
 echo $FSLEYES
 
 $FSLEYES --standard1mm \
-   $ATLAS_THAL/Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
-   $ATLAS_THAL/rResize_img_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
-   $ATLAS_THAL/flirt_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
-   $ATLAS_THAL/rCoreg_NN_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalamus/Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalamus/rResize_img_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalamus/flirt_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalamus/rCoreg_NN_Thalamus-maxprob-thr25-1mm.nii.gz -cm random -a 50 \
+```
+
+## Show Thalamocortical atlas
+```{bash eval=FALSE, include=FALSE}
+source /etc/fsl/fsl.sh
+
+# echo $ATLAS_SHIRER
+export NO_AT_BRIDGE=1 # accessibility bus warning
+
+echo $FSLEYES
+
+$FSLEYES --standard1mm \
+   $PATH_ATLAS/thalcort/r16mm_Thal07_Cort007.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalcort/r16mm_Thal07_Cort016.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalcort/r16mm_Thal07_Cort051.nii.gz -cm random -a 50 \
+   $PATH_ATLAS/thalcort/r16mm_Thal07_Cort114.nii.gz -cm random -a 50 \
+```
+
+## Create labels
+```{r}
+labels.thal = read.table(file.path(PATH_ATLAS, 'thalamus', 'labels_thalamus.txt'))
+labels.cort = read.table(file.path(PATH_ATLAS, 'yeo', 'labels_yeo7.txt'))
+lab = c(as.character(labels.thal$V2), as.character(labels.cort$V2))
+table = data.frame(nr=1:length(lab), label=lab)
+print(table)
+write.table(table, file=file.path(PATH_ATLAS, 'thalcort', 'label_Thal07_Cort007.txt'), quote = F, row.names = F)
 ```
 
