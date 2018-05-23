@@ -90,6 +90,13 @@ for i = 1:length(PAIRS_L1)
 end
 dlmwrite('HCPFilt_UnrelatedSubs7T_1stLeg.txt',HCPFilt,'precision','%d','delimiter','')
 
-
+%% Sanity Check 
+for i = 1:size(PAIRS,2)
+    
+    Idx = find(ismember(Tab7T.Subject,PAIRS(:,i)));
+    if Tab7T.Mother_ID(Idx(1))~=Tab7T.Mother_ID(Idx(2))
+        erorr('Wait! What?!')
+    end
+end
 
 
