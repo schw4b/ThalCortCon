@@ -90,6 +90,8 @@ for i = 1:length(PAIRS_L1)
 end
 dlmwrite('HCPFilt_UnrelatedSubs7T_1stLeg.txt',HCPFilt,'precision','%d','delimiter','')
 
+save(['HCPFilt_UnrelatedSubs7T_1stLeg.mat'],'PAIRS_L1')
+
 %% Sanity Check 
 for i = 1:size(PAIRS,2)
     
