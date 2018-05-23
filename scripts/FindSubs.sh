@@ -1,3 +1,6 @@
+#SA, Ox, 2018
+#srafyouni@gmail.com
+
 while read filename
 do
 	echo ${filename}
