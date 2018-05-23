@@ -181,11 +181,11 @@ $(document).ready(function () {
 <h2>Variables</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuRlNMRVlFUyA9ICcvdXNyL2Jpbi9mc2xleWVzJ1xuUEFUSF9IT01FID0gJy9ob21lL3NpbW9uJ1xuQVRMQVNfVEhBTCA9IGZpbGUucGF0aChQQVRIX0hPTUUsICdEYXRhJywgJ1RoYWxDb3J0Q29uJywgJ2F0bGFzJylcblN5cy5zZXRlbnYoRlNMRVlFUz1GU0xFWUVTLCBBVExBU19USEFMPUFUTEFTX1RIQUwpXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuRlNMRVlFUyA9ICcvdXNyL2Jpbi9mc2xleWVzJ1xuUEFUSF9IT01FID0gJy9ob21lL3NpbW9uJ1xuUEFUSF9BVExBUyA9IGZpbGUucGF0aChQQVRIX0hPTUUsICdEYXRhJywgJ1RoYWxDb3J0Q29uJywgJ2F0bGFzJylcblN5cy5zZXRlbnYoRlNMRVlFUz1GU0xFWUVTLCBQQVRIX0FUTEFTPVBBVEhfQVRMQVMpXG5gYGAifQ== -->
 <pre class="r"><code>FSLEYES = '/usr/bin/fsleyes'
 PATH_HOME = '/home/simon'
-ATLAS_THAL = file.path(PATH_HOME, 'Data', 'ThalCortCon', 'atlas')
-Sys.setenv(FSLEYES=FSLEYES, ATLAS_THAL=ATLAS_THAL)</code></pre>
+PATH_ATLAS = file.path(PATH_HOME, 'Data', 'ThalCortCon', 'atlas')
+Sys.setenv(FSLEYES=FSLEYES, PATH_ATLAS=PATH_ATLAS)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -194,10 +194,39 @@ Sys.setenv(FSLEYES=FSLEYES, ATLAS_THAL=ATLAS_THAL)</code></pre>
 <h2>Show Thalamic ROIs</h2>
 <!-- rnb-text-end -->
 <!-- rnb-text-begin -->
+</div>
+<div id="show-thalamocortical-atlas" class="section level2">
+<h2>Show Thalamocortical atlas</h2>
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="create-labels" class="section level2">
+<h2>Create labels</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGFiZWxzLnRoYWwgPSByZWFkLnRhYmxlKGZpbGUucGF0aChQQVRIX0FUTEFTLCAndGhhbGFtdXMnLCAnbGFiZWxzX3RoYWxhbXVzLnR4dCcpKVxubGFiZWxzLmNvcnQgPSByZWFkLnRhYmxlKGZpbGUucGF0aChQQVRIX0FUTEFTLCAneWVvJywgJ2xhYmVsc195ZW83LnR4dCcpKVxubGFiID0gYyhhcy5jaGFyYWN0ZXIobGFiZWxzLnRoYWwkVjIpLCBhcy5jaGFyYWN0ZXIobGFiZWxzLmNvcnQkVjIpKVxudGFibGUgPSBkYXRhLmZyYW1lKG5yPTE6bGVuZ3RoKGxhYiksIGxhYmVsPWxhYilcbnByaW50KHRhYmxlKVxuYGBgIn0= -->
+<pre class="r"><code>labels.thal = read.table(file.path(PATH_ATLAS, 'thalamus', 'labels_thalamus.txt'))
+labels.cort = read.table(file.path(PATH_ATLAS, 'yeo', 'labels_yeo7.txt'))
+lab = c(as.character(labels.thal$V2), as.character(labels.cort$V2))
+table = data.frame(nr=1:length(lab), label=lab)
+print(table)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6MiwibnJvdyI6MTR9LCJyZGYiOiJINHNJQUFBQUFBQUFBM1ZTeTI3Q01CQTBUa0lnUUdqRmQ1QURmMUNWWTNzcEV1cXRNc0VwVmgwN3NrMGZ0MzQ1N2NheFF4SzFTRXZzMlpuMXZwNjJ6NXZrT1VFSVlSU0VJY0lCSEVNTWZ5TVVvbW45L1VRb1dGa0NRZ3V3MURxYnUyV0RSV0Jqc0Joc0FsWUw2NkF6c1BsVkYzaTl4K01PZCtKNC84Vk9CNG1OT1gyblhNUHB4bm9iTkx5WHdyaHp2S1VGT1hOL25XeWwwbmZHQ0IvZ2daVUhscnZiYkVmNG5nclRKZXhrK1NpOVBEVW53bDlrbnJPS0djSWRlbXZSU21wVEVjWG8xYkZzSElvV0NqSnE0WVdIUzJtazZvV3VGQ3U3Nk55aW1nb3QxVmRQYm1oWlNkWEdEUFpNRDVvVDVaeG8zNXUyWXdYSjYvQUlYWVowUVVycTZkaUJXUGhNSWs0T2xBODBVeVUvTXErckI0ZS9rZjI1UVFVL2crZVRJekVrS3hSSS9rZ2hscFZoVWtBd3ZISlQ3NHBIYWdBc3o2SisvTGpPVDJmeHR0NjRMUm8xT2JTYmxQYTNxbjR5OUlsRnZpOVV2REpCKzhXNnlVQ1J0c1lNcHRNdVZnS296b3k4ampYSkpmZUlyUTFkZmdHc0t1RXhXd01BQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["nr"],"name":[1],"type":["int"],"align":["right"]},{"label":["label"],"name":[2],"type":["fctr"],"align":["left"]}],"data":[{"1":"1","2":"thal_primmotor"},{"1":"2","2":"thal_sensory"},{"1":"3","2":"thal_occipital"},{"1":"4","2":"thal_prefrontal"},{"1":"5","2":"thal_premotor"},{"1":"6","2":"thal_postparietal"},{"1":"7","2":"thal_temporal"},{"1":"8","2":"Cont"},{"1":"9","2":"Default"},{"1":"10","2":"DorsAttn"},{"1":"11","2":"Limbic"},{"1":"12","2":"SalVentAttn"},{"1":"13","2":"SomMot"},{"1":"14","2":"Vis"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[14]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxud3JpdGUudGFibGUodGFibGUsIGZpbGU9ZmlsZS5wYXRoKFBBVEhfQVRMQVMsICd0aGFsY29ydCcsICdsYWJlbF9UaGFsMDdfQ29ydDAwNy50eHQnKSwgcXVvdGUgPSBGLCByb3cubmFtZXMgPSBGKVxuYGBgIn0= -->
+<pre class="r"><code>write.table(table, file=file.path(PATH_ATLAS, 'thalcort', 'label_Thal07_Cort007.txt'), quote = F, row.names = F)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhhbENvcnQtcm9pcyIKYXV0aG9yOiAiU2ltb24gU2Nod2FiIgpkYXRlOiAiMTYgTWF5IDIwMTgiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCgojIyBWYXJpYWJsZXMKYGBge3J9CkZTTEVZRVMgPSAnL3Vzci9iaW4vZnNsZXllcycKUEFUSF9IT01FID0gJy9ob21lL3NpbW9uJwpBVExBU19USEFMID0gZmlsZS5wYXRoKFBBVEhfSE9NRSwgJ0RhdGEnLCAnVGhhbENvcnRDb24nLCAnYXRsYXMnKQpTeXMuc2V0ZW52KEZTTEVZRVM9RlNMRVlFUywgQVRMQVNfVEhBTD1BVExBU19USEFMKQpgYGAKCiMjIFNob3cgVGhhbGFtaWMgUk9JcwpgYGB7YmFzaCBldmFsPUZBTFNFLCBpbmNsdWRlPUZBTFNFfQpzb3VyY2UgL2V0Yy9mc2wvZnNsLnNoCgojIGVjaG8gJEFUTEFTX1NISVJFUgpleHBvcnQgTk9fQVRfQlJJREdFPTEgIyBhY2Nlc3NpYmlsaXR5IGJ1cyB3YXJuaW5nCgplY2hvICRGU0xFWUVTCgokRlNMRVlFUyAtLXN0YW5kYXJkMW1tIFwKICAgJEFUTEFTX1RIQUwvVGhhbGFtdXMtbWF4cHJvYi10aHIyNS0xbW0ubmlpLmd6IC1jbSByYW5kb20gLWEgNTAgXAogICAkQVRMQVNfVEhBTC9yUmVzaXplX2ltZ19UaGFsYW11cy1tYXhwcm9iLXRocjI1LTFtbS5uaWkuZ3ogLWNtIHJhbmRvbSAtYSA1MCBcCiAgICRBVExBU19USEFML2ZsaXJ0X1RoYWxhbXVzLW1heHByb2ItdGhyMjUtMW1tLm5paS5neiAtY20gcmFuZG9tIC1hIDUwIFwKICAgJEFUTEFTX1RIQUwvckNvcmVnX05OX1RoYWxhbXVzLW1heHByb2ItdGhyMjUtMW1tLm5paS5neiAtY20gcmFuZG9tIC1hIDUwIFwKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhhbENvcnQtcm9pcyIKYXV0aG9yOiAiU2ltb24gU2Nod2FiIgpkYXRlOiAiMTYgTWF5IDIwMTgiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCgojIyBWYXJpYWJsZXMKYGBge3J9CkZTTEVZRVMgPSAnL3Vzci9iaW4vZnNsZXllcycKUEFUSF9IT01FID0gJy9ob21lL3NpbW9uJwpQQVRIX0FUTEFTID0gZmlsZS5wYXRoKFBBVEhfSE9NRSwgJ0RhdGEnLCAnVGhhbENvcnRDb24nLCAnYXRsYXMnKQpTeXMuc2V0ZW52KEZTTEVZRVM9RlNMRVlFUywgUEFUSF9BVExBUz1QQVRIX0FUTEFTKQpgYGAKCiMjIFNob3cgVGhhbGFtaWMgUk9JcwpgYGB7YmFzaCBldmFsPUZBTFNFLCBpbmNsdWRlPUZBTFNFfQpzb3VyY2UgL2V0Yy9mc2wvZnNsLnNoCgojIGVjaG8gJEFUTEFTX1NISVJFUgpleHBvcnQgTk9fQVRfQlJJREdFPTEgIyBhY2Nlc3NpYmlsaXR5IGJ1cyB3YXJuaW5nCgplY2hvICRGU0xFWUVTCgokRlNMRVlFUyAtLXN0YW5kYXJkMW1tIFwKICAgJFBBVEhfQVRMQVMvdGhhbGFtdXMvVGhhbGFtdXMtbWF4cHJvYi10aHIyNS0xbW0ubmlpLmd6IC1jbSByYW5kb20gLWEgNTAgXAogICAkUEFUSF9BVExBUy90aGFsYW11cy9yUmVzaXplX2ltZ19UaGFsYW11cy1tYXhwcm9iLXRocjI1LTFtbS5uaWkuZ3ogLWNtIHJhbmRvbSAtYSA1MCBcCiAgICRQQVRIX0FUTEFTL3RoYWxhbXVzL2ZsaXJ0X1RoYWxhbXVzLW1heHByb2ItdGhyMjUtMW1tLm5paS5neiAtY20gcmFuZG9tIC1hIDUwIFwKICAgJFBBVEhfQVRMQVMvdGhhbGFtdXMvckNvcmVnX05OX1RoYWxhbXVzLW1heHByb2ItdGhyMjUtMW1tLm5paS5neiAtY20gcmFuZG9tIC1hIDUwIFwKYGBgCgojIyBTaG93IFRoYWxhbW9jb3J0aWNhbCBhdGxhcwpgYGB7YmFzaCBldmFsPUZBTFNFLCBpbmNsdWRlPUZBTFNFfQpzb3VyY2UgL2V0Yy9mc2wvZnNsLnNoCgojIGVjaG8gJEFUTEFTX1NISVJFUgpleHBvcnQgTk9fQVRfQlJJREdFPTEgIyBhY2Nlc3NpYmlsaXR5IGJ1cyB3YXJuaW5nCgplY2hvICRGU0xFWUVTCgokRlNMRVlFUyAtLXN0YW5kYXJkMW1tIFwKICAgJFBBVEhfQVRMQVMvdGhhbGNvcnQvcjE2bW1fVGhhbDA3X0NvcnQwMDcubmlpLmd6IC1jbSByYW5kb20gLWEgNTAgXAogICAkUEFUSF9BVExBUy90aGFsY29ydC9yMTZtbV9UaGFsMDdfQ29ydDAxNi5uaWkuZ3ogLWNtIHJhbmRvbSAtYSA1MCBcCiAgICRQQVRIX0FUTEFTL3RoYWxjb3J0L3IxNm1tX1RoYWwwN19Db3J0MDUxLm5paS5neiAtY20gcmFuZG9tIC1hIDUwIFwKICAgJFBBVEhfQVRMQVMvdGhhbGNvcnQvcjE2bW1fVGhhbDA3X0NvcnQxMTQubmlpLmd6IC1jbSByYW5kb20gLWEgNTAgXApgYGAKCiMjIENyZWF0ZSBsYWJlbHMKYGBge3J9CmxhYmVscy50aGFsID0gcmVhZC50YWJsZShmaWxlLnBhdGgoUEFUSF9BVExBUywgJ3RoYWxhbXVzJywgJ2xhYmVsc190aGFsYW11cy50eHQnKSkKbGFiZWxzLmNvcnQgPSByZWFkLnRhYmxlKGZpbGUucGF0aChQQVRIX0FUTEFTLCAneWVvJywgJ2xhYmVsc195ZW83LnR4dCcpKQpsYWIgPSBjKGFzLmNoYXJhY3RlcihsYWJlbHMudGhhbCRWMiksIGFzLmNoYXJhY3RlcihsYWJlbHMuY29ydCRWMikpCnRhYmxlID0gZGF0YS5mcmFtZShucj0xOmxlbmd0aChsYWIpLCBsYWJlbD1sYWIpCnByaW50KHRhYmxlKQp3cml0ZS50YWJsZSh0YWJsZSwgZmlsZT1maWxlLnBhdGgoUEFUSF9BVExBUywgJ3RoYWxjb3J0JywgJ2xhYmVsX1RoYWwwN19Db3J0MDA3LnR4dCcpLCBxdW90ZSA9IEYsIHJvdy5uYW1lcyA9IEYpCmBgYAoK</div>
 
 
 

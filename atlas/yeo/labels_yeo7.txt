@@ -1,0 +1,7 @@
+1 Cont
+2 Default
+3 DorsAttn
+4 Limbic
+5 SalVentAttn
+6 SomMot
+7 Vis

@@ -1,0 +1,7 @@
+1 thal_primmotor
+2 thal_sensory
+3 thal_occipital
+4 thal_prefrontal
+5 thal_premotor
+6 thal_postparietal
+7 thal_temporal
